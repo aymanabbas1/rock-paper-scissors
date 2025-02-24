@@ -1,11 +1,20 @@
-console.log("Hello World");
-
 let humanScore = 0;
 let computerScore = 0;
-let humanChoice = "";
-let computerChoice = ""; 
+let gamesCount = 0; 
+
+const final = document.querySelector('.final'); 
+const result = document.querySelector('.result'); 
+result.textContent = ""; 
+const buttons = document.querySelectorAll('button'); 
+
+buttons.forEach(function(button){
+  button.addEventListener('click', function(){
+    playRound(button.className, getComputerChoice());
+  }); 
+})
 
 function getComputerChoice() {
+  let computerChoice = ""; 
   let num = Math.floor(Math.random() * 3);
   if (num === 0) {
     computerChoice = "rock";
@@ -15,44 +24,36 @@ function getComputerChoice() {
   return computerChoice; 
 }
 
-
-function getHumanChoice() {
-  humanChoice = prompt("Rock, Paper, Scissors");
-  return humanChoice;
-}
-
-
 function playRound(humanChoice, computerChoice) {
-  humanChoice = humanChoice.toLowerCase();
   if (humanChoice === computerChoice) {
-    console.log("Tie");
+    result.textContent = "Tie between yall"; 
   } else if (
     (humanChoice == "rock" && computerChoice == "paper") ||
     (humanChoice == "paper" && computerChoice == "scissors") ||
     (humanChoice == "scissors" && computerChoice == "rock")
   ) {
-    console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+    result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
     computerScore++;
   } else {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+    result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
     humanScore++;
   }
-}
+  
+    if(gamesCount == 5){
 
+      let winner = (humanScore>computerScore)?"You":(humanScore == computerScore)?"Tie":"Computer"; 
 
+      final.textContent = `5 games complete, human score is ${humanScore} and computer score is ${computerScore} \n and winner is ${winner}`; 
 
-function playGame(){
+      gamesCount = 0; 
 
-    for(let i = 0; i<5; i++){
-    console.log(getComputerChoice());
-    console.log(getHumanChoice());
-    playRound(humanChoice, computerChoice);
-    
     }
-    console.log(humanScore);
-    console.log(computerScore);
+    else{
+      final.textContent = gamesCount;
+    }
+
+    gamesCount++;
 }
 
-playGame();
 
 
