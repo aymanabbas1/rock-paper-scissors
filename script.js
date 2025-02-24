@@ -42,7 +42,6 @@ function playRound(humanChoice, computerChoice) {
     if(gamesCount == 5){
 
       let winner = (humanScore>computerScore)?"You":(humanScore == computerScore)?"Tie":"Computer"; 
-D
       final.textContent = gamesCount;
     }
 
