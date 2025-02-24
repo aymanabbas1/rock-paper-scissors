@@ -5,6 +5,7 @@ let gamesCount = 0;
 const final = document.querySelector('.final'); 
 const result = document.querySelector('.result'); 
 result.textContent = ""; 
+final.textContent = ""; 
 const buttons = document.querySelectorAll('button'); 
 
 buttons.forEach(function(button){
@@ -25,6 +26,7 @@ function getComputerChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
+  gamesCount++;
   if (humanChoice === computerChoice) {
     result.textContent = "Tie between yall"; 
   } else if (
@@ -38,14 +40,13 @@ function playRound(humanChoice, computerChoice) {
     result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
     humanScore++;
   }
-  
-    if(gamesCount == 5){
-
-      let winner = (humanScore>computerScore)?"You":(humanScore == computerScore)?"Tie":"Computer"; 
-      final.textContent = gamesCount;
+  final.textContent = gamesCount;
+    if(gamesCount%5 == 0){
+      let winner  = (humanScore>computerScore)?"You":(humanScore == computerScore)?"Tie":"Computer"; 
+      result.textContent = `The winner afer 5 rounds is ${winner}`; 
     }
 
-    gamesCount++;
+    
 }
 
 
